@@ -1,0 +1,10 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: findev-pguser
+  namespace: finance
+data:
+  dbname: ZmluYW5jZQ==
+  password: V2VsY29tZTE=
+  user: ZmluYW5jZQ==
+type: Opaque
