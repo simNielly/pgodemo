@@ -1,4 +1,4 @@
-namespace: zoo
+namespace: keycloak
 
 resources:
 - postgres.yaml
