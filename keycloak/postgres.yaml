@@ -14,7 +14,7 @@ spec:
         limits:
           cpu: 1.0
           memory: 1Gi
-      volumeClaimSpec:
+      dataVolumeClaimSpec:
         accessModes:
         - "ReadWriteOnce"
         storageClassName: "standard"
@@ -22,9 +22,9 @@ spec:
           requests:
             storage: 10Gi
 
-  archive:
+  backups:
     pgbackrest:
-      image: us.gcr.io/container-suite/crunchy-pgbackrest:ubi8-13.2-ci-latest
+      image: us.gcr.io/container-suite/crunchy-pgbackrest:centos8-2.33-0
       repoHost:
         dedicated: {}
       repos:
