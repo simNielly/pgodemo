@@ -1,4 +1,5 @@
 namespace: finance
 
 resources:
+- findev-pguser.yaml
 - postgres.yaml
