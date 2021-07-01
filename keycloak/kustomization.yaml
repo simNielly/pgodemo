@@ -1,4 +1,4 @@
-namespace: ident
+namespace: keycloak
 
 resources:
 - postgres.yaml

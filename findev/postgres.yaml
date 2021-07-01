@@ -36,6 +36,11 @@ spec:
               requests:
                 storage: 10Gi
 
+  monitoring:
+    pgmonitor:
+      exporter:
+        image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-exporter:centos8-4.7.0
+
   patroni:
     dynamicConfiguration:
       postgresql:
