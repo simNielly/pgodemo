@@ -4,7 +4,7 @@ metadata:
   name: keycloakdb
   namespace: keycloak
 spec:
-  image: us.gcr.io/container-suite/crunchy-postgres-ha:ubi8-13.2-ci-latest
+  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.2-0
   openshift: true
   port: 5432
   postgresVersion: 13
@@ -25,7 +25,7 @@ spec:
 
   backups:
     pgbackrest:
-      image: us.gcr.io/container-suite/crunchy-pgbackrest:centos8-2.33-0
+      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:centos8-2.33-0
       repoHost:
         dedicated: {}
       repos:
