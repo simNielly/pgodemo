@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: findev-lb
+  name: acctdev-lb
   namespace: finance
 spec:
   selector:
     postgres-operator.crunchydata.com/role: master
-    postgres-operator.crunchydata.com/cluster: findev
+    postgres-operator.crunchydata.com/cluster: acctdev
   ports:
     - protocol: TCP
       port: 5432

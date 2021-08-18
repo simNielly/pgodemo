@@ -1,0 +1,50 @@
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PostgresCluster
+metadata:
+  name: payments
+spec:
+  instances:
+    - name: 'pgc'
+      replicas: 2
+      resources:
+        limits:
+          cpu: 1.0
+          memory: 1Gi
+      dataVolumeClaimSpec:
+        accessModes:
+        - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: 1Gi
+
+  # standby:
+  #   enabled: false
+  #   repoName: repo3
+
+  backups:
+    pgbackrest:
+      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:centos8-2.33-0
+      repoHost:
+        dedicated: {}
+      configuration:
+      repos:
+      - name: repo1
+        schedules:
+          full: "0 1 * * 7"
+          incremental: "0 1 * * 1-6"
+        volume:
+          volumeClaimSpec:
+            accessModes:
+            - "ReadWriteOnce"
+            resources:
+              requests:
+                storage: 1Gi
+  patroni:
+    dynamicConfiguration:
+      postgresql:
+        parameters:
+          max_parallel_workers: 2
+          max_worker_processes: 2
+          shared_buffers: 256MB
+          work_mem: 10MB
+          archive_timeout: 600

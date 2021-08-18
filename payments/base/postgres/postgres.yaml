@@ -1,48 +1,47 @@
 apiVersion: postgres-operator.crunchydata.com/v1beta1
 kind: PostgresCluster
 metadata:
-  name: findev
+  name: payments
 spec:
-  image: us.gcr.io/container-suite/crunchy-postgres-ha:centos8-13.2-ci-latest
-  openshift: true
+  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.3-1
+  openshift: false
   port: 5432
   postgresVersion: 13
   instances:
     - name: 'pgc'
-      replicas: 2
+      replicas: 1
       resources:
         limits:
           cpu: 1.0
-          memory: 2Gi
+          memory: 1Gi
       dataVolumeClaimSpec:
         accessModes:
         - "ReadWriteOnce"
-        storageClassName: "standard"
+        storageClassName: "freenas-nfs-csi"
         resources:
           requests:
-            storage: 10Gi
+            storage: 1Gi
   backups:
     pgbackrest:
-      image: us.gcr.io/container-suite/crunchy-pgbackrest:centos8-2.33-0
+      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:centos8-2.33-0
       repoHost:
         dedicated: {}
       repos:
       - name: repo1
-        schedules:
-          full: "0 1 * * 7"
-          incremental: "0 1 * * 1-6"
         volume:
           volumeClaimSpec:
             accessModes:
             - "ReadWriteOnce"
+            storageClassName: "freenas-nfs-csi"
             resources:
               requests:
-                storage: 10Gi
+                storage: 1Gi
 
+   
   monitoring:
     pgmonitor:
       exporter:
-        image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-exporter:centos8-4.7.0
+        image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.0.0-0
 
   patroni:
     dynamicConfiguration:
@@ -52,3 +51,4 @@ spec:
           max_worker_processes: 2
           shared_buffers: 256MB
           work_mem: 2MB
+          archive_timeout: 120
