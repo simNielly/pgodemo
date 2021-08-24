@@ -3,8 +3,13 @@ kind: PostgresCluster
 metadata:
   name: payments
 spec:
+  users:
+    - name: paymentuser
+      databases:
+         - paymentsdb
+         - accountsdb
   image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.3-1
-  openshift: false
+  openshift: true
   port: 5432
   postgresVersion: 13
   instances:
@@ -17,7 +22,6 @@ spec:
       dataVolumeClaimSpec:
         accessModes:
         - "ReadWriteOnce"
-        storageClassName: "freenas-nfs-csi"
         resources:
           requests:
             storage: 1Gi
@@ -32,7 +36,6 @@ spec:
           volumeClaimSpec:
             accessModes:
             - "ReadWriteOnce"
-            storageClassName: "freenas-nfs-csi"
             resources:
               requests:
                 storage: 1Gi
@@ -51,4 +54,4 @@ spec:
           max_worker_processes: 2
           shared_buffers: 256MB
           work_mem: 2MB
-          archive_timeout: 120
+          archive_timeout: 600

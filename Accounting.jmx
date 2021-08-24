@@ -39,7 +39,7 @@
           <stringProp name="dataSource">financedb</stringProp>
           <stringProp name="username">postgres</stringProp>
           <boolProp name="keepAlive">false</boolProp>
-          <stringProp name="dbUrl">jdbc:postgresql://findev-openshift:5432/acctdev</stringProp>
+          <stringProp name="dbUrl">jdbc:postgresql://acctdev-openshift:5432/acctdev</stringProp>
           <stringProp name="transactionIsolation">DEFAULT</stringProp>
           <stringProp name="initQuery"></stringProp>
           <boolProp name="preinit">false</boolProp>
@@ -333,7 +333,7 @@ where tid=?</stringProp>
           <stringProp name="dataSource">financedbver</stringProp>
           <stringProp name="username">postgres</stringProp>
           <boolProp name="keepAlive">true</boolProp>
-          <stringProp name="dbUrl">jdbc:postgresql://findev-openshift:5432/acctdev</stringProp>
+          <stringProp name="dbUrl">jdbc:postgresql://acctdev-openshift:5432/acctdev</stringProp>
           <stringProp name="transactionIsolation">DEFAULT</stringProp>
           <stringProp name="initQuery"></stringProp>
           <boolProp name="preinit">false</boolProp>
