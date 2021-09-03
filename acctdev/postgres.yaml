@@ -51,3 +51,5 @@ spec:
           max_worker_processes: 2
           shared_buffers: 256MB
           work_mem: 2MB
+
+# tag for upgrade centos8-13.4-4.7.2
