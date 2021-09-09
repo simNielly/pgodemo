@@ -5,7 +5,7 @@
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
-      <stringProp name="TestPlan.user_define_classpath">/app/postgres/jdbc/postgresql-42.2.18.jar</stringProp>
+      <stringProp name="TestPlan.user_define_classpath">/Users/simon/Crunchy/Demo_Operator/Operator_5.0.2/app/postgresql-42.2.23.jar</stringProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <stringProp name="TestPlan.comments"></stringProp>
