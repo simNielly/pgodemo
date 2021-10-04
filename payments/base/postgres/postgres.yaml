@@ -8,7 +8,9 @@ spec:
       databases:
          - paymentsdb
          - accountsdb
-  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.3-1
+  image: registry.crunchydata.com/crunchydata/crunchy-postgres-ha:ubi8-13.3-1
+  imagePullSecrets:
+  - name: crunchyreg
   openshift: true
   port: 5432
   postgresVersion: 13
@@ -27,7 +29,7 @@ spec:
             storage: 1Gi
   backups:
     pgbackrest:
-      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:centos8-2.33-0
+      image: registry.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.33-0
       repoHost:
         dedicated: {}
       repos:
@@ -44,7 +46,7 @@ spec:
   monitoring:
     pgmonitor:
       exporter:
-        image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.0.0-0
+        image: registry.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.0.2-0
 
   patroni:
     dynamicConfiguration:
@@ -53,5 +55,5 @@ spec:
           max_parallel_workers: 2
           max_worker_processes: 2
           shared_buffers: 256MB
-          work_mem: 10MB
+          work_mem: 2MB
           archive_timeout: 600
