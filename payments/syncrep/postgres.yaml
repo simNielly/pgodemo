@@ -1,0 +1,39 @@
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PostgresCluster
+metadata:
+  name: hippo
+spec:
+  image: registry.crunchydata.com/crunchydata/crunchy-postgres-ha:ubi8-13.4-0
+  imagePullSecrets:
+  - name: crunchyreg
+  postgresVersion: 13
+  instances:
+    - name: instance1
+      replicas: 2
+      dataVolumeClaimSpec:
+        accessModes:
+        - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: 1Gi
+  backups:
+    pgbackrest:
+      image: registry.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.33-2
+      repoHost:
+        dedicated: {}
+      repos:
+      - name: repo1
+        volume:
+          volumeClaimSpec:
+            accessModes:
+            - "ReadWriteOnce"
+            resources:
+              requests:
+                storage: 1Gi
+  patroni:
+    dynamicConfiguration:
+      postgresql:
+        parameters:
+          synchronous_commit: "on"
+          synchronous_standby_names: '*'
+      synchronous_mode: true

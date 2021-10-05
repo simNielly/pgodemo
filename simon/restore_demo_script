@@ -1,0 +1,25 @@
+
+oc apply -k restore
+
+oc get pod -n finance -L postgres-operator.crunchydata.com/role -l postgres-operator.crunchydata.com/instance
+
+oc rsh -n finance 
+
+psql -c "create table test (chkdate timestamp);"
+
+while(true)
+do
+ psql -c "insert into test (chkdate) values (current_timestamp);"
+ sleep 10
+done
+
+psql -c "select * from test order by chkdate;"
+
+
+ 2021-10-05 21:26:11
+
+oc annotate -n finance postgrescluster elephant --overwrite postgres-operator.crunchydata.com/pgbackrest-restore="$( date '+%F_%H:%M:%S' )"
+
+oc get pod -n finance -L postgres-operator.crunchydata.com/role -l postgres-operator.crunchydata.com/instance
+
+psql -c "select * from test order by chkdate;"

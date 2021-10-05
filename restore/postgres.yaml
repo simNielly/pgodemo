@@ -1,0 +1,40 @@
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PostgresCluster
+metadata:
+  name: elephant
+spec:
+  image: registry.crunchydata.com/crunchydata/crunchy-postgres-ha:ubi8-13.3-1
+  imagePullSecrets:
+  - name: crunchyreg
+  openshift: true
+  port: 5432
+  postgresVersion: 13
+  instances:
+    - name: 'ele'
+      replicas: 2
+      dataVolumeClaimSpec:
+        accessModes:
+        - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: 2Gi
+  backups:
+    pgbackrest:
+      restore:
+        enabled: true
+        repoName: repo1
+        options:
+          - --type=time
+          - --target="2021-10-05 21:26:11" 
+      image: registry.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.33-0
+      repoHost:
+        dedicated: {}
+      repos:
+      - name: repo1
+        volume:
+          volumeClaimSpec:
+            accessModes:
+            - "ReadWriteOnce"
+            resources:
+              requests:
+                storage: 5Gi
