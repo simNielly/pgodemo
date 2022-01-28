@@ -28,8 +28,6 @@ spec:
   backups:
     pgbackrest:
       image: registry.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.33-1
-      repoHost:
-        dedicated: {}
       repos:
       - name: repo1
         volume:
