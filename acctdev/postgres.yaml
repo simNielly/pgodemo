@@ -54,4 +54,4 @@ spec:
           shared_buffers: 256MB
           work_mem: 2MB
 
-# tag for upgrade ubi8-13.4-4.7.2
+# tag for upgrade ubi8-13.4-0
