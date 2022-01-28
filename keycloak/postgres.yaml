@@ -4,7 +4,7 @@ metadata:
   name: keycloakdb
   namespace: keycloak
 spec:
-  image: registry.crunchydata.com/crunchydata/crunchy-postgres-ha:ubi8-13.3-1
+  image: registry.crunchydata.com/crunchydata/crunchy-postgres-ha:ubi8-13.4-0
   imagePullSecrets:
   - name: crunchyreg
   openshift: true
@@ -27,7 +27,7 @@ spec:
 
   backups:
     pgbackrest:
-      image: registry.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.33-1
+      image: registry.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.36-0
       repos:
       - name: repo1
         volume:
@@ -42,5 +42,5 @@ spec:
   monitoring:
     pgmonitor:
       exporter:
-        image: registry.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.0.2-0
+        image: registry.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.0.3-0
 
