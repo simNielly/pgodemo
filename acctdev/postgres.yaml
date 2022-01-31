@@ -3,7 +3,7 @@ kind: PostgresCluster
 metadata:
   name: acctdev
 spec:
-  image: registry.crunchydata.com/crunchydata/crunchy-postgres-ha:ubi8-13.3-1
+  image: registry.crunchydata.com/crunchydata/crunchy-postgres:ubi8-13.4-1
   imagePullSecrets:
   - name: crunchyreg
   openshift: true
@@ -24,7 +24,7 @@ spec:
             storage: 2Gi
   backups:
     pgbackrest:
-      image: registry.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.33-0
+      image: registry.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.35-0
       repoHost:
         dedicated: {}
       repos:
@@ -43,7 +43,7 @@ spec:
   monitoring:
     pgmonitor:
       exporter:
-        image: registry.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.0.2-0
+        image: registry.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.0.4-0
 
   patroni:
     dynamicConfiguration:
@@ -54,4 +54,4 @@ spec:
           shared_buffers: 256MB
           work_mem: 2MB
 
-# tag for upgrade ubi8-13.4-0
+# tag for upgrade ubi8-13.5-0
