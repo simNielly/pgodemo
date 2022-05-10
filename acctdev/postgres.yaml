@@ -10,7 +10,7 @@ spec:
   port: 5432
   postgresVersion: 13
   instances:
-    - name: 'pgc'
+    - name: 'instance1'
       replicas: 2
       resources:
         limits:
@@ -21,7 +21,7 @@ spec:
         - "ReadWriteOnce"
         resources:
           requests:
-            storage: 2Gi
+            storage: 5Gi
   backups:
     pgbackrest:
       image: registry.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.35-0
@@ -36,20 +36,18 @@ spec:
             - "ReadWriteOnce"
             resources:
               requests:
-                storage: 2Gi
+                storage: 10Gi
 
   monitoring:
     pgmonitor:
       exporter:
-        image: registry.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.0.4-0
+        image: registry.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.0.5-0
 
-  patroni:
-    dynamicConfiguration:
-      postgresql:
-        parameters:
-          max_parallel_workers: 2
-          max_worker_processes: 2
-          shared_buffers: 256MB
-          work_mem: 2MB
+#  patroni:
+#    dynamicConfiguration:
+#      postgresql:
+#        parameters:
+          #shared_buffers: 256MB
+          #work_mem: 2MB
 
 # tag for upgrade ubi8-13.5-0
