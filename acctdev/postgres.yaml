@@ -25,6 +25,10 @@ spec:
   backups:
     pgbackrest:
       image: registry.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.35-0
+      manual:
+        repoName: repo1
+        options:
+        - --type=full
       repos:
       - name: repo1
         schedules:
